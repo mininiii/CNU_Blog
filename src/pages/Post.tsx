@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { deletePostById, getPostById } from '../api';
-import { IAdvertisement, IPost } from '../api/types';
+import { IPost } from '../api/types';
 import NotFound from '../components/NotFound';
 import Tag from '../components/Tag';
 
@@ -66,15 +66,15 @@ const Post = () => {
   const navigate = useNavigate();
 
   const fetchPostById = async () => {
-    const { data } = await getPostById(postId ?? "");
+    const { data } = await getPostById(postId ?? '');
     const { post } = data;
     setPost(post);
   };
-  
+
   useEffect(() => {
     fetchPostById();
   }, []);
-  
+
   if (!post) {
     return <NotFound />;
   }
@@ -85,7 +85,7 @@ const Post = () => {
     }
   };
   const requestDeletePostById = async () => {
-    await deletePostByID(postId);
+    await deletePostById(postId ?? '');
     navigate('/');
   };
   // todo (4) post 컴포넌트 작성
@@ -98,7 +98,7 @@ const Post = () => {
             <div>n분전</div>
           </Info>
           <div>
-            <Link to="/write" state={{postId}} style={{ marginRight: 10}}>
+            <Link to="/write" state={{ postId }} style={{ marginRight: 10 }}>
               <TextButton>수정</TextButton>
             </Link>
             <TextButton onClick={clickDeleteButton}>삭제</TextButton>

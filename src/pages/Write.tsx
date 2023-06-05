@@ -105,9 +105,9 @@ const Write = () => {
   const requestCreatePost = async () => {
     await createPost(title, content, tag);
   };
-    const requestUpdatePost = async () => {
-        await updatePostById(state.postId, title, content, tag);
-    };
+  const requestUpdatePost = async () => {
+    await updatePostById(state.postId, title, content, tag);
+  };
 
   const clickConfirm = () => {
     if (!title || !content) {
@@ -115,25 +115,25 @@ const Write = () => {
       return;
     }
     if (isEdit) {
-        requestUpdatePost();
+      requestUpdatePost();
     } else {
-        requestCreatePost();
+      requestCreatePost();
     }
     navigate('/');
   };
 
   const fetchPostById = async (postId: string) => {
-      const {data} = await getPostByID(postId);
-      const {post} = data;
-      setTitle(post.title);
-      setContent(post.contents);
-      setTag(post.tag);
+    const { data } = await getPostById(postId);
+    const { post } = data;
+    setTitle(post.title);
+    setContent(post.contents);
+    setTag(post.tag);
   };
 
   useEffect(() => {
-      if (isEdit) {
-          fetchPostById(state.postId);
-      }
+    if (isEdit) {
+      fetchPostById(state.postId);
+    }
   }, []);
 
   // todo (5) 게시글 작성 페이지 만들기
